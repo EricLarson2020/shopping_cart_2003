@@ -47,4 +47,41 @@ class ShoppingCart
 
     (total_number_of_products.to_f/capacity.to_f).round(4) * 100
   end
+
+  def sorted_products_by_quantity
+
+    highest_quantity = 0
+    sorted_quantity = []
+    products.each do |product|
+      if  product.quantity >= highest_quantity
+        highest_quantity = product.quantity
+        sorted_quantity.unshift(product)
+    elsif product.quantity < highest_quantity
+        sorted_quantity << product
+      end
+    end
+  sorted_quantity
+  end
+
+  def product_breakdown
+
+    paper = products.select do |product|
+      product.category == :paper
+      end
+
+    meat = products.select do |product|
+      product.category == :meat
+      end
+
+    produce = products.select do |product|
+      product.category == :produce
+    end
+
+    hash_breakdown = {
+      :meat => meat,
+      :paper => paper,
+      :produce => produce
+    }
+    hash_breakdown
+  end
 end

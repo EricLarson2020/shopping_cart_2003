@@ -107,21 +107,20 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(product2)
     cart.add_product(product3)
     product4 = Product.new(:produce, 'apples', 0.99, '20')
+    cart.add_product(product4)
+    assert_equal [product4, product1, product2, product3], cart.sorted_products_by_quantity
+  end
+
+  def test_cart_breakdown
+    cart = ShoppingCart.new("King Soopers", "30items")
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:meat, 'chicken', 4.50, '2')
+    product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+    product4 = Product.new(:produce, 'apples', 0.99, '20')
+    cart.add_product(product4)
+    assert_equal ({:meat=>[product2], :paper=>[product1, product3], :produce=>[product4]}), cart.product_breakdown
   end
 end
-
-
-
-#
-# pry(main)> product4 = Product.new(:produce, 'apples', 0.99, '20')
-#
-# #=> #<Product:0x00007fccd2985f53...>
-#
-# pry(main)> cart.add_product(product4)
-#
-# pry(main)> cart.sorted_products_by_quantity
-# #=> [#<Product:0x00007fccd2985f53...>, #<Product:0x00007fccd2985f51...>, #<Product:0x00007fccd2985f48...>, #<Product:0x00007fccd29b5720...>]
-#
-# pry(main)> cart.product_breakdown
-# #=> {:meat=>[#<Product:0x00007fccd2985f48...>], :paper=> [#<Product:0x00007fccd29b5720...>, #<Product:0x00007fccd2985f51...>], :produce=> [#<Product:0x00007fccd2985f53...>]}
-# ```
