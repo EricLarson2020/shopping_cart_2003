@@ -93,38 +93,25 @@ class ShoppingCartTest < Minitest::Test
     product2 = Product.new(:meat, 'chicken', 4.50, '2')
     product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
     cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+    assert_equal 43.33, cart.percentage_occupied
+  end
+
+  def test_sort_products_by_quantity
+    cart = ShoppingCart.new("King Soopers", "30items")
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:meat, 'chicken', 4.50, '2')
+    product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+    product4 = Product.new(:produce, 'apples', 0.99, '20')
+  end
 end
 
 
-# ```ruby
-# pry(main)> require './lib/product'
-# #=> true
-#
-# pry(main)> require './lib/shopping_cart'
-# #=> true
-#
-# pry(main)> cart = ShoppingCart.new("King Soopers", "30items")
-#
-# #=> #<ShoppingCart:0x00007fccd30375f8...>
-#
-# pry(main)> product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
-# #=> #<Product:0x00007fccd29b5720...>
-#
-# pry(main)> product2 = Product.new(:meat, 'chicken', 4.50, '2')
-# #=> #<Product:0x00007fccd2985f48...>
-#
-# pry(main)> product3 = Product.new(:paper, 'tissue paper', 1.25, '1')
-#
-# #=> #<Product:0x00007fccd2985f51...>
-#
-# pry(main)> cart.add_product(product1)
-#
-# pry(main)> cart.add_product(product2)
-#
-# pry(main)> cart.add_product(product3)
-#
-# pry(main)> cart.percentage_occupied
-# #=> 43.33
+
 #
 # pry(main)> product4 = Product.new(:produce, 'apples', 0.99, '20')
 #

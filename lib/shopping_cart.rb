@@ -42,4 +42,9 @@ class ShoppingCart
     }
     details_hash
   end
+
+  def percentage_occupied
+
+    (total_number_of_products.to_f/capacity.to_f).round(4) * 100
+  end
 end
